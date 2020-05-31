@@ -39,4 +39,32 @@ public class Board {
     public static String getYAxis(int i) {
         return yAxis[i];
     }
+
+    public static boolean validation(String axis, String color) {
+        if(true) {
+            String[] splitAxis = axis.split(",");
+
+            int x축 = 0;
+            int y축 = 0;
+
+            for (int i = 0; i < yAxis.length; i++) {
+                if (yAxis[i].equals(splitAxis[0]))
+                    x축 = i;
+                if (yAxis[i].equals(splitAxis[1]))
+                    y축 = i;
+            }
+
+            switch (color) {
+                case "white" :
+                    board[x축][y축] = 2;
+                    break;
+                case "black" :
+                    board[x축][y축] = 1;
+                    break;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

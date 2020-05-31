@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="omok-game" target="1.5" />
+      <module name="omok-game" target="7" />
       <module name="untitled" target="1.5" />
     </bytecodeTargetLevel>
   </component>

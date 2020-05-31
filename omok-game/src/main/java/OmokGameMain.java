@@ -4,15 +4,16 @@ import java.util.Scanner;
 
 public class OmokGameMain {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         System.out.println("오목게임 시작하기");
         System.out.println("오목게임은 2인용으로 진행되며 먼저 연결된 5돌을 만드는 것이 승리조건 입니다.");
 
         while(true) {
-            System.out.println("오목판 사이즈를 n을 입력해주세요. (n x n)");
+            System.out.println("오목판 사이즈 n을 입력해주세요. (n x n) 최소 10, 최대 30 입니다.");
             int size = sc.nextInt();
 
-            if(size <= 10 || size >= 30) {
+            if(size < 10 || size > 30) {
                 System.out.println("사이즈가 허용범위를 벗어났습니다. 재설정 해주세요.");
             } else {
                 // 오목판 생성
@@ -24,19 +25,15 @@ public class OmokGameMain {
             }
         }
 
-
-        String[] 세로 = new String[] {"1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"};
-        String 가로 = Arrays.toString(세로).replace(",", " ").substring(1,Arrays.toString(세로).length()-1);
-
+        int blackCnt = 1;
+        int whiteCnt = 1;
+        int tatolCnt = 1;
         while (true) {
             System.out.println("============================================");
             System.out.println(Board.getXAxis());
 
             int[][] board = Board.getBoard();
-            board[1][2] = 1;
-            board[4][6] = 2;
-            board[6][7] = 1;
-            board[1][4] = 2;
+
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
 
@@ -54,7 +51,40 @@ public class OmokGameMain {
                 System.out.println("");
             }
             System.out.println("============================================");
-            System.exit(0);
+
+
+            while (true) {
+
+                String Axis;
+                if (tatolCnt % 2 == 1) {
+                    // 흑돌 차례
+                    System.out.println("흑 돌의 " + blackCnt + "번 째 차례입니다.");
+                    System.out.println("x좌표와 y좌표를 쉼표를 사용하여 입력해주세요.");
+                    Axis = sc.next();
+                    boolean isValid = Board.validation(Axis, "black");
+                    if(isValid == true) {
+                        blackCnt++;
+                        tatolCnt++;
+                        break;
+                    } else {
+                        System.out.println("유요한 값을 입력하지 않았습니다. 다시 입력해주세요.");
+                    }
+                } else {
+                    // 백돌 차례
+                    System.out.println("백 돌의 " + whiteCnt + "번 째 차례입니다.");
+                    System.out.println("x좌표와 y좌표를 쉼표를 사용하여 입력해주세요.");
+                    Axis = sc.next();
+                    boolean isValid = Board.validation(Axis, "white");
+                    if(isValid == true) {
+                        whiteCnt++;
+                        tatolCnt++;
+                        break;
+                    } else {
+                        System.out.println("유요한 값을 입력하지 않았습니다. 다시 입력해주세요.");
+                    }
+                }
+            }
+//            Board.putStone(Axis);
         }
     }
 }
