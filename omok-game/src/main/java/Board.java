@@ -1,12 +1,17 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Board {
-    private static int[][] board;
     private static String xAxis = "";
     private static String[] yAxis;
+    private static int[][] board;
+    private static Map<String, Integer> lastStone = new HashMap<>();
+
+    // 마지막으로 둔 오목돌 가져오기
+    public static Map<String, Integer> getLastStone() { return lastStone;}
 
     // 오목판 생성
-    public static void createBoard(int size) {
-        board = new int[size][size];
-    }
+    public static void createBoard(int size) { board = new int[size][size]; }
 
     // 오목판 불러오기
     public static int[][] getBoard(){
@@ -55,13 +60,24 @@ public class Board {
             }
 
             switch (color) {
-                case "white" :
-                    board[x축][y축] = 2;
-                    break;
+                // 흑돌
                 case "black" :
                     board[x축][y축] = 1;
+                    lastStone.put("색상", 1);
+                    lastStone.put("x축", x축);
+                    lastStone.put("y축", y축);
+                    break;
+
+                // 백돌
+                case "white" :
+                    board[x축][y축] = 2;
+                    lastStone.put("색상", 2);
+                    lastStone.put("x축", x축);
+                    lastStone.put("y축", y축);
                     break;
             }
+
+
             return true;
         } else {
             return false;

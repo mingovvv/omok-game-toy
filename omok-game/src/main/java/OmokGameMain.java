@@ -6,8 +6,7 @@ public class OmokGameMain {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("오목게임 시작하기");
-        System.out.println("오목게임은 2인용으로 진행되며 먼저 연결된 5돌을 만드는 것이 승리조건 입니다.");
+        System.out.println("오목게임 시작합니다.");
 
         while(true) {
             System.out.println("오목판 사이즈 n을 입력해주세요. (n x n) 최소 10, 최대 30 입니다.");
@@ -52,6 +51,17 @@ public class OmokGameMain {
             }
             System.out.println("============================================");
 
+            // 알고리즘 비교
+            if(tatolCnt != 1){
+                boolean endGame = Algorithm.Result(board);
+                if(endGame == true) {
+                    System.out.println("================================================");
+                    System.out.println(tatolCnt % 2 == 1 ? "백 돌의 승리입니다." : "흑 돌의 승리입니다.");
+                    System.out.println("================================================");
+                    break;
+                }
+            }
+
 
             while (true) {
 
@@ -84,7 +94,6 @@ public class OmokGameMain {
                     }
                 }
             }
-//            Board.putStone(Axis);
         }
     }
 }
