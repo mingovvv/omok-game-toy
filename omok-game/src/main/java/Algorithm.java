@@ -20,7 +20,34 @@ public class Algorithm {
     }
 
     private static boolean check대각선(int color, int x축, int y축, int[][] board) {
-        return false;
+        int indexX = 0;
+        int indexY = 0;
+        int cnt = 0;
+
+        try {
+            // 가장 왼쪽 가장 아래 좌표 구하기
+            for (int i = 0; i< 5; i++) {
+                if(board[x축 + i][y축 - i] != color) {
+                    break;
+                }
+                indexX = x축 - i;
+                indexY = y축 + i;
+            }
+            System.out.println("===가장 아래 x축=== : " + indexX);
+            System.out.println("===가장 아래 y축=== : " + indexY);
+
+            // 가장 왼쪽 아래쪽 좌표부터 대각선으로 5개가 일치하는지 확인
+            for (int j = 0; j < 5; j++) {
+                if(board[indexX - j][indexY + j] == color) {
+                    cnt++;
+                }
+            }
+            System.out.println("===연결 트루=== : " + cnt);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return cnt == 5 ? true : false;
+        }
+
+        return cnt == 5 ? true : false;
     }
 
     private static boolean check세로(int color, int x축, int y축, int[][] board) {
